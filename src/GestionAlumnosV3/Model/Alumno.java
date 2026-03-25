@@ -39,6 +39,8 @@ public class Alumno {
         this.nombre = nombre;
     }
     public void anyadirModuloNota(String modulo, double nota){
+        modulos.put(modulo, nota);
+        this.notas = getNotas();
     }
     public void anyadirNota(double nota){
         notas.add(nota);
