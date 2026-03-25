@@ -1,5 +1,6 @@
 package GestionAlumnosV3.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -7,10 +8,11 @@ public class Alumno {
     private String dni, nombre;
     private List<Double> notas;
     private TreeMap<String, Double> modulos;
-    public Alumno(String dni, String nombre, List<Double> notas){
+    public Alumno(String dni, String nombre, TreeMap<String, Double> modulos){
         this.dni = dni;
         this.nombre = nombre;
-        this.notas = notas;
+        this.modulos = modulos;
+        this.notas = getNotas();
     }
     // Getters
     public String getDNI(){
@@ -19,16 +21,24 @@ public class Alumno {
     public String getNombre(){
         return nombre;
     }
+    public TreeMap<String, Double> getModulos(){
+        return modulos;
+    }
     public List<Double> getNotas(){
+        List<Double> notas = new ArrayList<>();
+        for (String modulo : modulos.keySet()){
+            notas.add(modulos.get(modulo));
+        }
         return notas;
     }
-
     // Setters
     public void setDNI(String dni) {
         this.dni = dni;
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public void anyadirModuloNota(String modulo, double nota){
     }
     public void anyadirNota(double nota){
         notas.add(nota);
@@ -46,6 +56,6 @@ public class Alumno {
                 "\n- DNI: " + dni +
                 "\n- Nombre: " + nombre +
                 "\n- Nota media: " + getNotaMedia()+
-                "\n- Notas: "+ notas;
+                "\n- Modulos: "+ modulos;
     }
 }

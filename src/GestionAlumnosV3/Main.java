@@ -9,11 +9,31 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcion = 7;
         TreeMap<String, Alumno> alumnoMap = new TreeMap<>();
-        List<Alumno> alumnos = new ArrayList<>(List.of(
-                new Alumno("123A", "cris", new ArrayList<>(List.of(9.0, 8.5))),
-                new Alumno("456B", "ivan", new ArrayList<>(List.of(6.0, 7.5, 8.0))),
-                new Alumno("789C", "gaby", new ArrayList<>(List.of(5.2)))
-        ));
+        List<Alumno> alumnos = new ArrayList<>();
+        alumnos.add(new Alumno(
+                "123A",
+                "Cris",
+                new TreeMap<String, Double>(
+                        Map.of(
+                     "Programación", 8.5,
+                     "BBDD", 7.0
+                ))));
+        alumnos.add(new Alumno(
+                "111A",
+                "Javi",
+                new TreeMap<String, Double>(
+                        Map.of(
+                                "Programación", 6.5,
+                                "BBDD", 6.0
+                        ))));
+        alumnos.add(new Alumno(
+                "222A",
+                "Nacho",
+                new TreeMap<String, Double>(
+                        Map.of(
+                                "Programación", 5.5,
+                                "BBDD", 3.0
+                        ))));
         for (Alumno alumno : alumnos){
             alumnoMap.put(alumno.getDNI(), alumno);
         }
@@ -50,7 +70,7 @@ public class Main {
                     System.out.print("Inserta el nombre [String]\n> ");
                     nombre = sc.nextLine();
 
-                    alumno = new Alumno(dni, nombre, new ArrayList<>());
+                    alumno = new Alumno(dni, nombre, new TreeMap<String, Double>());
                     alumnoMap.put(alumno.getDNI(), alumno);
                     System.out.println("ALUMNO INSERTADO CORRECTAMENTE");
 
@@ -64,12 +84,18 @@ public class Main {
                             boolean valido = false;
                             while(!valido){
                                 try{
+                                    String modulo;
                                     double nota;
+                                    System.out.println("Escribe el nombre del módulo a INSERTAR [String]\n> ");
+                                    do {
+                                        modulo = sc.nextLine();
+                                    } while (alumno.getModulos().containsKey(modulo));
+
                                     System.out.print("Escribe la nota a INSERTAR [double]\n> ");
                                     nota = sc.nextDouble();
                                     sc.nextLine();
 
-                                    alumno.anyadirNota(nota);
+                                    alumno.getModulos().put(modulo, nota);
                                     valido = true;
                                 } catch (InputMismatchException e){
                                     System.out.println("[ERROR]: TIPO INCORRECTO, DEBE SER DOUBLE");
@@ -100,12 +126,12 @@ public class Main {
                         System.out.print("\nInserta el DNI del Alumno: \n> ");
                         String dni = sc.nextLine();
                         if (alumnoMap.containsKey(dni)){
-//                           Alumno alumno = alumnoMap.get(dni);
-//                            System.out.println("\nNOTAS DE "+ alumno.getNombre().toUpperCase()+
-//                                                "\n-------------------------");
-//                            for (double nota : alumno.getNotas()){
-//                                System.out.println("- "+nota);
-//                            }
+                           Alumno alumno = alumnoMap.get(dni);
+                            System.out.println("\nMÓDULOS DE "+ alumno.getNombre().toUpperCase()+
+                                                "\n-------------------------");
+                            for (String modulo : alumno.getModulos().keySet()){
+                                System.out.println("- "+modulo);
+                            }
 
                         } else {
                             System.out.println("\n[ERROR]: EL DNI INSERTADO NO ESTÁ REGISTRADO");
@@ -130,12 +156,47 @@ public class Main {
                     }
                 } else if (opcion == 6) {
                     if (!(alumnoMap.isEmpty())){
-                        Alumno max = alumnos.get(0);
-                        for (Alumno alumno : alumnos) {
-                            if (alumno.getNotaMedia() > max.getNotaMedia()) max = alumno;
+                        System.out.print("\nInserta el DNI del Alumno: \n> ");
+                        String dni = sc.nextLine();
+                        if (alumnoMap.containsKey(dni)){
+                            Alumno alumno = alumnoMap.get(dni);
+                            System.out.println("\nMÓDULOS DE "+ alumno.getNombre().toUpperCase()+
+                                    "\n-------------------------");
+                            for (String modulo : alumno.getModulos().keySet()){
+                                System.out.println("- "+modulo+": "+alumno.getModulos().get(modulo));
+                            }
+                            boolean valido = false;
+                            while(!valido){
+                                System.out.print("Inserta el MÓDULO para cambiar su NOTA\n> ");
+                                String modulo = sc.nextLine();
+                                if (alumno.getModulos().containsKey(modulo)){
+                                    boolean notaValida = false;
+                                    while(!notaValida){
+                                        System.out.print("Inserta la nueva NOTA[double]\n> ");
+                                        double nota = sc.nextDouble();
+                                        sc.nextLine();
+                                        if (sc.hasNextDouble()){
+
+                                        }
+                                    }
+
+                                } else {
+                                    System.out.println("\n[ERROR]: EL MÓDULO INSERTADO NO SE ENCUENTRA EN LA LISTA");
+                                }
+                            }
+
+
+
+                        } else {
+                            System.out.println("\n[ERROR]: EL DNI INSERTADO NO ESTÁ REGISTRADO");
                         }
-                        System.out.println("ALUMNO CON MEJOR MEDIA");
-                        System.out.println(max);
+                        Alumno alumno = alumnoMap.get(dni);
+                        System.out.println("\nMÓDULOS DE "+ alumno.getNombre().toUpperCase()+
+                                "\n-------------------------");
+                        for (String modulo : alumno.getModulos().keySet()){
+                            System.out.println("- "+modulo);
+                        }
+
                     } else {
                         System.out.println("\n[ERROR]: NO HAY ALUMNOS REGISTRADOS");
                     }
