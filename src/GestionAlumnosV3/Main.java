@@ -1,6 +1,6 @@
-package GestionAlumnosV2;
+package GestionAlumnosV3;
 
-import GestionAlumnosV2.Model.Alumno;
+import GestionAlumnosV3.Model.Alumno;
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion = 7;
-        HashMap<String, Alumno> alumnoMap = new HashMap<>();
+        TreeMap<String, Alumno> alumnoMap = new TreeMap<>();
         List<Alumno> alumnos = new ArrayList<>(List.of(
                 new Alumno("123A", "cris", new ArrayList<>(List.of(9.0, 8.5))),
                 new Alumno("456B", "ivan", new ArrayList<>(List.of(6.0, 7.5, 8.0))),
@@ -22,12 +22,14 @@ public class Main {
                 System.out.print("\nGESTOR DE ALUMNOS"+
                         "\n-------------------------"+
                         "\n- (1) AÑADIR Alumno"+
-                        "\n- (2) AÑADIR nota a un Alumno"+
+                        "\n- (2) AÑADIR módulo y nota a un Alumno"+
                         "\n- (3) MOSTRAR todos los Alumnos"+
-                        "\n- (4) MOSTRAR notas de un Alumno"+
+                        "\n- (4) MOSTRAR módulos de un Alumno"+
                         "\n- (5) MOSTRAR media de un Alumno"+
-                        "\n- (6) MOSTRAR Alumno con mejor media"+
-                        "\n- (7) SALIR\n> ")
+                        "\n- (6) MODIFICAR nota de un módulo"+
+                        "\n- (7) ELIMINAR módulo de un Alumno"+
+                        "\n- (8) MOSTRAR Alumno con mejor media"+
+                        "\n- (9) SALIR\n> ")
                 ;
                 opcion = sc.nextInt();
                 sc.nextLine();
@@ -98,12 +100,12 @@ public class Main {
                         System.out.print("\nInserta el DNI del Alumno: \n> ");
                         String dni = sc.nextLine();
                         if (alumnoMap.containsKey(dni)){
-                           Alumno alumno = alumnoMap.get(dni);
-                            System.out.println("\nNOTAS DE "+ alumno.getNombre().toUpperCase()+
-                                                "\n-------------------------");
-                            for (double nota : alumno.getNotas()){
-                                System.out.println("- "+nota);
-                            }
+//                           Alumno alumno = alumnoMap.get(dni);
+//                            System.out.println("\nNOTAS DE "+ alumno.getNombre().toUpperCase()+
+//                                                "\n-------------------------");
+//                            for (double nota : alumno.getNotas()){
+//                                System.out.println("- "+nota);
+//                            }
 
                         } else {
                             System.out.println("\n[ERROR]: EL DNI INSERTADO NO ESTÁ REGISTRADO");
@@ -144,7 +146,7 @@ public class Main {
 
 
 
-        } while (opcion != 7);
+        } while (opcion != 9);
         System.out.println("Fin del programa.");
     }
 }
