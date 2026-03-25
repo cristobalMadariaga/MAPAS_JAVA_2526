@@ -15,8 +15,8 @@ public class Main {
                 "Cris",
                 new TreeMap<String, Double>(
                         Map.of(
-                     "Programación", 8.5,
-                     "BBDD", 7.0
+                     "Programación", 1.5,
+                     "BBDD", 1.0
                 ))));
         alumnos.add(new Alumno(
                 "111A",
@@ -71,10 +71,8 @@ public class Main {
                     nombre = sc.nextLine();
 
                     alumno = new Alumno(dni, nombre, new TreeMap<String, Double>());
+                    alumnos.add(alumno);
                     alumnoMap.put(alumno.getDNI(), alumno);
-                    for (Alumno a : alumnos){
-                        alumnoMap.put(a.getDNI(), a);
-                    }
                     System.out.println("ALUMNO INSERTADO CORRECTAMENTE");
 
 
