@@ -47,10 +47,12 @@ public class Alumno {
     }
     public double getNotaMedia(){
         double suma = 0;
-        for (double nota : notas){
+        for (String modulo : modulos.keySet()){
+            double nota = modulos.get(modulo);
             suma+=nota;
+
         }
-        return suma/notas.size();
+        return suma/modulos.size();
     }
     @Override
     public String toString(){
