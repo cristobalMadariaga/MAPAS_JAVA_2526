@@ -128,9 +128,15 @@ public class Main {
                     }
                 } else if (opcion == 6) {
                     if (!(alumnoMap.isEmpty())){
-                        Alumno max = alumnos.get(0);
-                        for (Alumno alumno : alumnos) {
+                        Alumno max = null;
+                        int i = 0;
+                        for (String dni : alumnoMap.keySet()){
+                            Alumno alumno = alumnoMap.get(dni);
+                            if (i == 0){
+                                max = alumno;
+                            }
                             if (alumno.getNotaMedia() > max.getNotaMedia()) max = alumno;
+                            i++;
                         }
                         System.out.println("ALUMNO CON MEJOR MEDIA");
                         System.out.println(max);

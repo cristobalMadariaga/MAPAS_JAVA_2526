@@ -71,7 +71,6 @@ public class Main {
                     nombre = sc.nextLine();
 
                     alumno = new Alumno(dni, nombre, new TreeMap<String, Double>());
-                    alumnos.add(alumno);
                     alumnoMap.put(alumno.getDNI(), alumno);
                     System.out.println("ALUMNO INSERTADO CORRECTAMENTE");
 
@@ -240,7 +239,7 @@ public class Main {
                     }
                 } else if (opcion == 8){
                     if (!(alumnoMap.isEmpty())){
-                        Alumno max = alumnos.get(0);
+                        Alumno max = alumnoMap.get(alumnoMap.firstKey());
                         for (Alumno alumno : alumnos) {
                             if (alumno.getNotaMedia() > max.getNotaMedia()) max = alumno;
                         }
